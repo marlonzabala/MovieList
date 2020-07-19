@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/rootView"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white">
+
+    <ImageView
+        android:id="@+id/imageViewArtwork"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="300dp"
+        android:contentDescription="@string/image_content_description"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_height="300dp"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <View
+        android:id="@+id/imageGradient"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/gradient_bg"
+        android:cacheColorHint="#00000000"
+        android:contentDescription="@string/image_content_description"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:minHeight="300dp"
+        tools:layout_height="300dp" />
+
+    <TextView
+        android:id="@+id/textViewGenre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewArtwork"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="Genre" />
+
+    <TextView
+        android:id="@+id/textViewDirector"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Director" />
+
+    <TextView
+        android:id="@+id/textViewTrackName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textViewDirector"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Title" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
