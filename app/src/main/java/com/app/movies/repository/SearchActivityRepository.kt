@@ -36,7 +36,7 @@ class SearchActivityRepository(val application: Application){
 
         val service = retrofit.create(ItunesNetwork::class.java)
 
-        service.getMovies(term,"movie","au").enqueue(object : Callback<ItunesResult>{
+        service.getMovies(term,"movie","us").enqueue(object : Callback<ItunesResult>{
             override fun onFailure(call: Call<ItunesResult>, t: Throwable) {
                 showProgress.value = false
                 Toast.makeText(application, application.getString(R.string.error_result), Toast.LENGTH_LONG).show()
@@ -61,7 +61,7 @@ class SearchActivityRepository(val application: Application){
 
         //https://rss.itunes.apple.com/api/v1/au/movies/top-movies/all/50/explicit.json
         service.getTopMovies(
-            "au",
+            "us",
             "movies",
             "top-movies",
             "all",

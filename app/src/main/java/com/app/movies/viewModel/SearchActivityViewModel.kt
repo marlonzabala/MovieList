@@ -27,6 +27,7 @@ class SearchActivityViewModel(application: Application) : AndroidViewModel(appli
     fun searchMovies(term : String) {
         repository.searchMovies(term)
         preferenceRepository.setLastSearchTerm(term)
+        preferenceRepository.setIsTopMovies(false)
     }
 
     fun setViewingSearch(){
@@ -35,15 +36,6 @@ class SearchActivityViewModel(application: Application) : AndroidViewModel(appli
 
     fun init() {
         repository.getTopMovies()
-
-
-//        val lastSearchTerm = preferenceRepository.getLastSearchTerm()
-//
-//        if(lastSearchTerm.isNotEmpty()) {
-//            searchTerm.value = lastSearchTerm
-//        } else {
-//            repository.getTopMovies()
-//            //searchTerm.value = "Star"
-//        }
+        preferenceRepository.setIsTopMovies(true)
     }
 }

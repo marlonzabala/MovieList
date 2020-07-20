@@ -33,6 +33,7 @@ class ItunesItemSearchAdapter(private val context: Context) :
         holder.rootView.setOnClickListener {
             if(list[position].trackId.toString().isNotEmpty()) {
                 PreferenceRepository(context).setLastPosition(position)
+                PreferenceRepository(context).setMovieId(list[position].trackId)
                 val intent = Intent(context, DetailsActivity::class.java)
                 context.startActivity(intent)
             }

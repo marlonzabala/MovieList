@@ -19,5 +19,5 @@ interface ItunesNetwork {
         @Query("country") country : String) : Call<ItunesResult>
 
     @GET("lookup?")
-    fun lookUp(@Query("id") id : String) : Call<ItunesResult>
+    fun lookUp(@Query("id") id : Int) : Call<ItunesResult>
 }

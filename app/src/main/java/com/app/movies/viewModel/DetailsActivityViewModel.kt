@@ -13,18 +13,23 @@ import com.app.movies.repository.PreferenceRepository
 class DetailsActivityViewModel (application: Application) : AndroidViewModel(application) {
     private val repository = DetailsActivityRepository(application)
     private val preferenceRepository = PreferenceRepository(application)
-    private val showProgress : LiveData<Boolean>
+    val showProgress : LiveData<Boolean>
     val itunesItem : LiveData<ItunesItem>
 
     init {
         this.showProgress = repository.showProgress
-        this.itunesItem = repository.itunesItem
+        this.itunesItem = repository.movieInfo
     }
 
     fun loadMovie() {
-        repository.searchMovies(
-            preferenceRepository.getLastSearchTerm(),
-            preferenceRepository.getLastPosition())
+        if(preferenceRepository.getIsTopMovies()) {
+            repository.lookupId(preferenceRepository.getMovieId())
+        } else {
+            repository.searchMovies(
+                preferenceRepository.getLastSearchTerm(),
+                preferenceRepository.getLastPosition()
+            )
+        }
 
         preferenceRepository.setIsViewingDetails(true)
     }
