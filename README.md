@@ -1,31 +1,25 @@
-# Movie List using itunes api
+# Top US Movies
 
-Simple Itunes API search using MVVM in kotlin
+Shows the top US Movie using itunes api
 
-This is a master-detail application that lists items from the itunes search API
+JSON APIs used on app:
 
-Default URL used on startup:
+https://rss.itunes.apple.com/api/v1/us/movies/top-movies/all/100/explicit.json
+https://itunes.apple.com/search?term=search
 
-https://itunes.apple.com/search?term=star&amp;country=au&amp;media=movie&amp;all
+More info about this api here:
+https://affiliate.itunes.apple.com/resources/documentation/itunes-store-web-service-search-api/
 
-Shows a list of movies on the main page and you can search through them.
+You can also search all movies on the database
 
-Details showed on the list are:
-- Movie Name
-- Artwork
-- Genre
+Clicking on an item will direct you to the Details Activity, giving a long description on about the selected item.
 
-Clicking on an item will direct you to the Details Activity, giving a longer description on about the selected item.
-
-A placeholder image is used in the event of image retrieval failure.
+Read and parse JSON using Retrofit library
 
 # Persistence
-The app stores data on the preferences.
+The app stores data on database using Room Library.
 
-When app is destroyed when viewing a detail of a movie, you are retured to the detail activity upon reopen
-
-Search terms are also retianed. When returning to the app. The last search term will be showed.
-
+All data is added to database and will be used when device is offline
 
 # MVVM architecture
 The app uses MVVM architecture in Kotlin
@@ -33,6 +27,5 @@ The app uses MVVM architecture in Kotlin
 MVVM was chosen because it is recommended by Google.
 
 With the use of live data, components are less coupled which results in less buggy code.
-
 
 ## Download APK here:
