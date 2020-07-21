@@ -24,7 +24,15 @@ class SearchActivityViewModel(application: Application) : AndroidViewModel(appli
         this.itunesItemList = repository.itunesItemList
     }
 
-    fun searchMovies(term : String) {
+    fun handleSearchMovie(term : String) {
+        if (term.isNotEmpty()) {
+            searchMovie(term)
+        } else {
+            getTopMovies()
+        }
+    }
+
+    private fun searchMovie(term : String) {
         repository.searchMovies(term)
         preferenceRepository.setLastSearchTerm(term)
         preferenceRepository.setIsTopMovies(false)
@@ -35,6 +43,10 @@ class SearchActivityViewModel(application: Application) : AndroidViewModel(appli
     }
 
     fun init() {
+        getTopMovies()
+    }
+
+    private fun getTopMovies() {
         repository.getTopMovies()
         preferenceRepository.setIsTopMovies(true)
     }

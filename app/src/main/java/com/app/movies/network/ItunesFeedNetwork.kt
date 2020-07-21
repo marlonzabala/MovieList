@@ -11,7 +11,6 @@ import retrofit2.http.Path
 const val BASE_URL_FEED = "https://rss.itunes.apple.com/"
 
 interface ItunesFeedNetwork {
-
     @GET("api/v1/{country}/{media_type}/{feed_type}/{genre}/{result_limit}/{explicit}.json")
     fun getTopMovies(
         @Path(value = "country", encoded = true) country : String,
@@ -21,15 +20,4 @@ interface ItunesFeedNetwork {
         @Path(value = "result_limit", encoded = true) resultLimit : String,
         @Path(value = "explicit", encoded = true) explicit : String
     ) : Call<ItunesItemFeed>
-
-//    // removed "&all" because default value is all
-//    @GET("search?")
-//    fun getMovies(
-//        @Query("term") term : String,
-//        @Query("media") media : String,
-//        @Query("country") country : String
-//    ) : Call<ItunesResult>
-//
-//    @GET("lookup?")
-//    fun lookUp(@Query("id") id : String) : Call<ItunesResult>
 }

@@ -2,6 +2,6 @@
     <string name="app_name">Top Movies</string>
     <string name="search_hint">Search</string>
     <string name="image_content_description">Poster of movie</string>
-    <string name="error_result">Error getting result</string>
+    <string name="error_result">Network Error, showing saved offline data</string>
     <string name="director_label">Director: %1$s</string>
 </resources>

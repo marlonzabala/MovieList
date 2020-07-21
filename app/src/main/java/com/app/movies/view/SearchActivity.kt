@@ -26,14 +26,13 @@ class SearchActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(SearchActivityViewModel::class.java)
 
         imageViewSearch.setOnClickListener {
-            if(editTextSearch.text!!.isNotEmpty())
-                viewModel.searchMovies(editTextSearch.text.toString())
+            viewModel.handleSearchMovie(editTextSearch.text.toString())
         }
 
         editTextSearch.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                if(editTextSearch.text!!.isNotEmpty())
-                    viewModel.searchMovies(editTextSearch.text.toString())
+                viewModel.handleSearchMovie(editTextSearch.text.toString())
+
                 return@OnEditorActionListener true
             }
             false
@@ -58,7 +57,7 @@ class SearchActivity : AppCompatActivity() {
 
         viewModel.searchTerm.observe(this, Observer {
             editTextSearch.setText(it)
-            viewModel.searchMovies(it)
+            viewModel.handleSearchMovie(it)
         })
 
         initDefaultValues()

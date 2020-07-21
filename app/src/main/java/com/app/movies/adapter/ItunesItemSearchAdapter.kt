@@ -11,6 +11,7 @@ import com.app.movies.extensions.load
 import com.app.movies.network.model.ItunesItem
 import com.app.movies.repository.PreferenceRepository
 import com.app.movies.utils.Converter
+import com.app.movies.utils.RandomColor
 import com.app.movies.view.DetailsActivity
 import kotlinx.android.synthetic.main.rv_itunes_item_child.view.*
 
@@ -38,7 +39,7 @@ class ItunesItemSearchAdapter(private val context: Context) :
                 context.startActivity(intent)
             }
         }
-        holder.rootView.background = Converter.getRandomDrawableColor()
+        holder.rootView.background = RandomColor.getRandomDrawableColor()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

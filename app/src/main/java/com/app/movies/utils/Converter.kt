@@ -2,6 +2,7 @@ package com.app.movies.utils
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import com.app.movies.db.Movie
 import com.app.movies.network.model.ItunesItem
 import com.app.movies.network.model.ItunesItemFeed
 import java.util.*
@@ -9,7 +10,7 @@ import java.util.*
 
 class Converter {
     companion object {
-        fun convertToItemList(itemFeed: ItunesItemFeed): List<ItunesItem> {
+        fun convertFeedToItunesItemList(itemFeed: ItunesItemFeed): List<ItunesItem> {
             val list: MutableList<ItunesItem> = mutableListOf()
             val feedItems = itemFeed.feed.results
 
@@ -18,11 +19,11 @@ class Converter {
                     continue
 
                 val itunesItem = ItunesItem(
+                    feedItem.id.toInt(),
+                    feedItem.name,
                     feedItem.artworkUrl100,
                     "",
                     feedItem.genres.get(0).name,
-                    feedItem.id.toInt(),
-                    feedItem.name,
                     feedItem.artistName
                 )
                 list.add(itunesItem)
@@ -31,19 +32,84 @@ class Converter {
             return list
         }
 
-        fun getRandomDrawableColor(): ColorDrawable? {
-            val idx: Int = Random().nextInt(vibrantLightColorList.size-1)
-            return vibrantLightColorList[idx]
+        fun convertItunesItemToMovie(itunesItem: List<ItunesItem>): List<Movie>  {
+            val movieList: MutableList<Movie> = mutableListOf()
+
+            for (feedItem in itunesItem) {
+                if(feedItem.artworkUrl100 == "")
+                    continue
+
+                val movie = Movie(
+                    feedItem.trackId,
+                    feedItem.trackName,
+                    feedItem.artworkUrl100,
+                    feedItem.longDescription,
+                    feedItem.primaryGenreName,
+                    feedItem.artistName,
+                    99
+                )
+                movieList.add(movie)
+            }
+
+            return movieList
         }
 
-        private val vibrantLightColorList = arrayOf(
-            ColorDrawable(Color.parseColor("#9ACCCD")), ColorDrawable(Color.parseColor("#8FD8A0")),
-            ColorDrawable(Color.parseColor("#CBD890")), ColorDrawable(Color.parseColor("#DACC8F")),
-            ColorDrawable(Color.parseColor("#D9A790")), ColorDrawable(Color.parseColor("#D18FD9")),
-            ColorDrawable(Color.parseColor("#FF6772")), ColorDrawable(Color.parseColor("#DDFB5C"))
-        )
+        fun convertItunesItemToTopMovie(itunesItem: List<ItunesItem>): List<Movie>  {
+            val movieList: MutableList<Movie> = mutableListOf()
+            var positionCounter = 0
+            for (feedItem in itunesItem) {
+                positionCounter++
 
+                if(feedItem.artworkUrl100 == "")
+                    continue
+
+                val movie = Movie(
+                    feedItem.trackId,
+                    feedItem.trackName,
+                    feedItem.artworkUrl100,
+                    feedItem.longDescription,
+                    feedItem.primaryGenreName,
+                    feedItem.artistName,
+                    positionCounter
+                )
+                movieList.add(movie)
+            }
+
+            return movieList
+        }
+
+        fun convertMovieToItunesItem(itunesItem: List<Movie>): List<ItunesItem>  {
+            val movieList: MutableList<ItunesItem> = mutableListOf()
+
+            for (feedItem in itunesItem) {
+                if(feedItem.artworkUrl100 == "")
+                    continue
+
+                val movie = ItunesItem(
+                    feedItem.trackId,
+                    feedItem.trackName,
+                    feedItem.artworkUrl100,
+                    feedItem.longDescription,
+                    feedItem.primaryGenreName,
+                    feedItem.artistName
+                )
+                movieList.add(movie)
+            }
+
+            return movieList
+        }
+
+        fun convertMovieToItunesItem(movie: Movie): ItunesItem  {
+            val itunesItem = ItunesItem(
+                movie.trackId,
+                movie.trackName,
+                movie.artworkUrl100,
+                movie.longDescription,
+                movie.primaryGenreName,
+                movie.artistName
+            )
+
+            return itunesItem
+        }
     }
-
-
 }

@@ -40,10 +40,14 @@ class DetailsActivity : AppCompatActivity() {
                 .load(it.artworkUrl100)
 
             val requestOption = RequestOptions()
-//                .placeholder(R.mipmap.ic_launcher)
                 .centerCrop()
-//                .error(R.mipmap.ic_launcher)
                 .dontTransform()
+
+            Glide.with(this)
+                .load(it.artworkUrl100)
+                .thumbnail(thumbnailRequest)
+                .apply(requestOption)
+                .into(imageViewDetailsArtwork)
 
             // Get higher quality image
             Glide.with(this)
