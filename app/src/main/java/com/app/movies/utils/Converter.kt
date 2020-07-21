@@ -1,12 +1,8 @@
 package com.app.movies.utils
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import com.app.movies.db.Movie
 import com.app.movies.network.model.ItunesItem
 import com.app.movies.network.model.ItunesItemFeed
-import java.util.*
-
 
 class Converter {
     companion object {
@@ -85,14 +81,7 @@ class Converter {
                 if(feedItem.artworkUrl100 == "")
                     continue
 
-                val movie = ItunesItem(
-                    feedItem.trackId,
-                    feedItem.trackName,
-                    feedItem.artworkUrl100,
-                    feedItem.longDescription,
-                    feedItem.primaryGenreName,
-                    feedItem.artistName
-                )
+                val movie = convertMovieToItunesItem(feedItem)
                 movieList.add(movie)
             }
 

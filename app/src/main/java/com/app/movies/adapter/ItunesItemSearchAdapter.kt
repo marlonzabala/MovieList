@@ -23,6 +23,7 @@ class ItunesItemSearchAdapter(private val context: Context) :
         this.list = list
         notifyDataSetChanged()
     }
+
     override fun getItemCount(): Int {
         return list.size
     }
